@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArtistHero } from '../components/artist-profile/ArtistHero'
 import { ProjectGrid } from '../components/artist-profile/ProjectGrid'
+import { Lightbox } from '../components/lightbox/Lightbox'
 import { GlassButton } from '../components/ui/GlassButton'
 import { getArtistBySlug } from '../data/artists'
 
@@ -37,11 +38,12 @@ export function ArtistProfilePage() {
           />
         </div>
       </div>
-      {openProjectIndex !== null && (
-        <p role="status" className="sr-only">
-          Proyecto seleccionado: {artist.projects[openProjectIndex]?.title}
-        </p>
-      )}
+      <Lightbox
+        projects={artist.projects}
+        activeIndex={openProjectIndex}
+        onClose={() => setOpenProjectIndex(null)}
+        onIndexChange={setOpenProjectIndex}
+      />
     </div>
   )
 }
