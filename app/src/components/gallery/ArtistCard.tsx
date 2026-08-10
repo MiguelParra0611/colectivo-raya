@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import type { Artist } from '../../data/types'
 import { useImageCycler } from '../../hooks/useImageCycler'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { GlassCard } from '../ui/GlassCard'
 
 interface ArtistCardProps {
@@ -11,20 +13,27 @@ interface ArtistCardProps {
 const CYCLE_INTERVAL_MS = 3200
 
 export function ArtistCard({ artist }: ArtistCardProps) {
+  const prefersReducedMotion = usePrefersReducedMotion()
   const { index, pause, resume } = useImageCycler(artist.projects.length, {
     intervalMs: CYCLE_INTERVAL_MS,
   })
   const activeProject = artist.projects[index]
+
+  // El auto-avance queda detenido permanentemente si el usuario prefiere
+  // menos movimiento — se ve la primera imagen, sin ciclo automático.
+  useEffect(() => {
+    if (prefersReducedMotion) pause()
+  }, [prefersReducedMotion, pause])
 
   return (
     <Link
       to={`/artists/${artist.slug}`}
       aria-label={`Ver el portafolio de ${artist.name}`}
       className="block rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-      onMouseEnter={pause}
-      onMouseLeave={resume}
-      onFocus={pause}
-      onBlur={resume}
+      onMouseEnter={prefersReducedMotion ? undefined : pause}
+      onMouseLeave={prefersReducedMotion ? undefined : resume}
+      onFocus={prefersReducedMotion ? undefined : pause}
+      onBlur={prefersReducedMotion ? undefined : resume}
     >
       <GlassCard interactive className="overflow-hidden p-0">
         <div className="relative aspect-[4/5] w-full overflow-hidden">

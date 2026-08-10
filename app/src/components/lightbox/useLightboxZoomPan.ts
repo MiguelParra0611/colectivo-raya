@@ -63,13 +63,10 @@ export function useLightboxZoomPan(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeKey])
 
-  const clampPan = useCallback(
-    (nextScale: number, nextX: number, nextY: number) => {
+  const clampToScale = useCallback(
+    (nextScale: number, value: number) => {
       const bound = (nextScale - minScale) * panExtent
-      return {
-        x: clamp(nextX, -bound, bound),
-        y: clamp(nextY, -bound, bound),
-      }
+      return clamp(value, -bound, bound)
     },
     [minScale, panExtent],
   )
@@ -82,11 +79,11 @@ export function useLightboxZoomPan(
         setX(0)
         setY(0)
       } else {
-        setX((current) => clampPan(clampedScale, current, 0).x)
-        setY((current) => clampPan(clampedScale, 0, current).y)
+        setX((current) => clampToScale(clampedScale, current))
+        setY((current) => clampToScale(clampedScale, current))
       }
     },
-    [minScale, maxScale, clampPan],
+    [minScale, maxScale, clampToScale],
   )
 
   const zoomIn = useCallback(
@@ -109,10 +106,10 @@ export function useLightboxZoomPan(
   const pan = useCallback(
     (deltaX: number, deltaY: number) => {
       if (scale <= minScale) return
-      setX((current) => clampPan(scale, current + deltaX, 0).x)
-      setY((current) => clampPan(scale, 0, current + deltaY).y)
+      setX((current) => clampToScale(scale, current + deltaX))
+      setY((current) => clampToScale(scale, current + deltaY))
     },
-    [scale, minScale, clampPan],
+    [scale, minScale, clampToScale],
   )
 
   return {

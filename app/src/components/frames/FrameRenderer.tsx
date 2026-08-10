@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion'
-import type { ComponentType } from 'react'
+import type { ComponentType, CSSProperties } from 'react'
 import type { FrameStyle } from '../../data/types'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { ButterflyIcon, CatIcon, StarIcon, VineIcon } from './icons'
@@ -9,7 +9,7 @@ interface FrameRendererProps {
 }
 
 interface Ornament {
-  style: React.CSSProperties
+  style: CSSProperties
   size: number
   delay: number
   color: string

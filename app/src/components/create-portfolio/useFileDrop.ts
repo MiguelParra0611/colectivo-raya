@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 interface UseFileDropOptions {
   maxSizeBytes?: number
@@ -27,19 +27,14 @@ export function useFileDrop({
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [isDraggingOver, setIsDraggingOver] = useState(false)
-  const previewUrlRef = useRef<string | null>(null)
 
-  useEffect(() => {
-    previewUrlRef.current = previewUrl
-  }, [previewUrl])
-
+  // Revoca el object URL vigente cada vez que cambia (reemplazo o clear())
+  // y también al desmontar — un único efecto cubre ambos casos.
   useEffect(() => {
     return () => {
-      if (previewUrlRef.current) {
-        URL.revokeObjectURL(previewUrlRef.current)
-      }
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
     }
-  }, [])
+  }, [previewUrl])
 
   const acceptFiles = useCallback(
     (files: FileList | File[] | null) => {
@@ -58,22 +53,14 @@ export function useFileDrop({
         return
       }
 
-      if (previewUrlRef.current) {
-        URL.revokeObjectURL(previewUrlRef.current)
-      }
-
-      const nextPreviewUrl = URL.createObjectURL(candidate)
       setFile(candidate)
-      setPreviewUrl(nextPreviewUrl)
+      setPreviewUrl(URL.createObjectURL(candidate))
       setError(null)
     },
     [maxSizeBytes],
   )
 
   const clear = useCallback(() => {
-    if (previewUrlRef.current) {
-      URL.revokeObjectURL(previewUrlRef.current)
-    }
     setFile(null)
     setPreviewUrl(null)
     setError(null)

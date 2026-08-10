@@ -108,122 +108,123 @@ export function Lightbox({
     dragState.current = null
   }
 
-  if (!isOpen || !project) return null
-
   return createPortal(
     <AnimatePresence>
-      <motion.div
-        ref={containerRef}
-        role="dialog"
-        aria-modal="true"
-        aria-label={`${project.title} — vista ampliada`}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        onKeyDown={handleKeyDown}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.25 }}
-      >
-        <button
-          type="button"
-          aria-label="Cerrar vista ampliada"
-          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          onClick={onClose}
-        />
-
+      {isOpen && project && (
         <motion.div
-          className="relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+          key="lightbox"
+          ref={containerRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${project.title} — vista ampliada`}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onKeyDown={handleKeyDown}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
         >
-          <div className="glass-surface flex items-center justify-between gap-3 px-5 py-3">
-            <div className="min-w-0">
-              <h2 className="truncate font-display text-lg font-semibold text-ink">
-                {project.title}
-              </h2>
-            </div>
-            <div className="flex items-center gap-2">
-              <GlassButton
-                variant="ghost"
-                aria-label="Alejar"
-                onClick={zoomOut}
-                disabled={scale <= 1}
-              >
-                −
-              </GlassButton>
-              <GlassButton
-                variant="ghost"
-                aria-label="Acercar"
-                onClick={zoomIn}
-              >
-                +
-              </GlassButton>
-              <GlassButton
-                ref={closeButtonRef}
-                variant="secondary"
-                aria-label="Cerrar vista ampliada"
-                onClick={onClose}
-              >
-                Cerrar
-              </GlassButton>
-            </div>
-          </div>
+          <button
+            type="button"
+            aria-label="Cerrar vista ampliada"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={onClose}
+          />
 
-          <div
-            className="relative flex-1 overflow-hidden bg-black/40"
-            onWheel={(event) => {
-              event.preventDefault()
-              onWheel(event.deltaY)
-            }}
+          <motion.div
+            className="relative z-10 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-3xl"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 26 }}
           >
-            {projects.length > 1 && (
-              <>
-                <button
-                  type="button"
-                  aria-label="Proyecto anterior"
-                  onClick={goPrev}
-                  className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+            <div className="glass-surface flex items-center justify-between gap-3 px-5 py-3">
+              <div className="min-w-0">
+                <h2 className="truncate font-display text-lg font-semibold text-ink">
+                  {project.title}
+                </h2>
+              </div>
+              <div className="flex items-center gap-2">
+                <GlassButton
+                  variant="ghost"
+                  aria-label="Alejar"
+                  onClick={zoomOut}
+                  disabled={scale <= 1}
                 >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  aria-label="Proyecto siguiente"
-                  onClick={goNext}
-                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+                  −
+                </GlassButton>
+                <GlassButton
+                  variant="ghost"
+                  aria-label="Acercar"
+                  onClick={zoomIn}
                 >
-                  ›
-                </button>
-              </>
-            )}
-            <div className="flex h-[60vh] items-center justify-center">
-              <motion.img
-                key={project.id}
-                src={project.image.fullSrc}
-                alt={project.image.alt}
-                onDoubleClick={toggleZoom}
-                onPointerDown={handlePointerDown}
-                onPointerMove={handlePointerMove}
-                onPointerUp={handlePointerUp}
-                onPointerCancel={handlePointerUp}
-                className="max-h-full max-w-full touch-none select-none object-contain"
-                style={{ cursor: isZoomed ? 'grab' : 'zoom-in' }}
-                animate={{ scale, x, y }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                onClick={() => {
-                  if (!isZoomed) toggleZoom()
-                }}
-              />
+                  +
+                </GlassButton>
+                <GlassButton
+                  ref={closeButtonRef}
+                  variant="secondary"
+                  aria-label="Cerrar vista ampliada"
+                  onClick={onClose}
+                >
+                  Cerrar
+                </GlassButton>
+              </div>
             </div>
-          </div>
 
-          <div className="glass-surface px-5 py-4">
-            <p className="text-sm text-ink-muted">{project.description}</p>
-          </div>
+            <div
+              className="relative flex-1 overflow-hidden bg-black/40"
+              onWheel={(event) => {
+                event.preventDefault()
+                onWheel(event.deltaY)
+              }}
+            >
+              {projects.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    aria-label="Proyecto anterior"
+                    onClick={goPrev}
+                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    aria-label="Proyecto siguiente"
+                    onClick={goNext}
+                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
+              <div className="flex h-[60vh] items-center justify-center">
+                <motion.img
+                  key={project.id}
+                  src={project.image.fullSrc}
+                  alt={project.image.alt}
+                  onDoubleClick={toggleZoom}
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
+                  className="max-h-full max-w-full touch-none select-none object-contain"
+                  style={{ cursor: isZoomed ? 'grab' : 'zoom-in' }}
+                  animate={{ scale, x, y }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  onClick={() => {
+                    if (!isZoomed) toggleZoom()
+                  }}
+                />
+              </div>
+            </div>
+
+            <div className="glass-surface px-5 py-4">
+              <p className="text-sm text-ink-muted">{project.description}</p>
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      )}
     </AnimatePresence>,
     document.body,
   )
