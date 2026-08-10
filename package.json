@@ -1,0 +1,13 @@
+{
+  "name": "colectivo-raya-tools",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Herramientas de build a nivel de repo (no forma parte de la app). Ver app/ para la aplicación.",
+  "scripts": {
+    "images:optimize": "node scripts/optimize-images.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
+  }
+}
