@@ -6,14 +6,14 @@
   que tocar componentes cuando se defina la paleta final.
 */
 :root {
-  --color-bg-start: #0f1420;
-  --color-bg-mid: #1a1030;
-  --color-bg-end: #250f2e;
+  --color-bg-start: #0d1117;
+  --color-bg-mid: #1c1420;
+  --color-bg-end: #23140f;
   --color-surface: 255 255 255;
-  --color-ink: #f5f3ff;
-  --color-ink-muted: #b8b3d1;
-  --color-accent: #b06bff;
-  --color-accent-2: #6bd8ff;
+  --color-ink: #f6f3ef;
+  --color-ink-muted: #b7aea3;
+  --color-accent: #ff9d5c;
+  --color-accent-2: #5cc9d8;
 
   --glass-bg-alpha: 0.08;
   --glass-border-alpha: 0.16;
@@ -61,6 +61,17 @@ body {
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+  Receta única de "glass" — toda la superficie translúcida del sitio pasa
+  por esta clase para que blur/opacidad/borde se mantengan consistentes.
+*/
+.glass-surface {
+  background-color: rgb(var(--color-surface) / var(--glass-bg-alpha));
+  border: 1px solid rgb(var(--color-surface) / var(--glass-border-alpha));
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
 }
 
 @media (prefers-reduced-motion: reduce) {
