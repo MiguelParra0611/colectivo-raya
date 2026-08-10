@@ -13,7 +13,7 @@ export function ProjectThumb({ project, onOpen }: ProjectThumbProps) {
       type="button"
       interactive
       onClick={onOpen}
-      className="block w-full overflow-hidden p-0 text-left"
+      className="group block w-full overflow-hidden p-0 text-left"
       aria-label={`Ver "${project.title}" en grande`}
     >
       <div className="relative aspect-square w-full overflow-hidden">
