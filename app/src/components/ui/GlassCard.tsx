@@ -1,20 +1,29 @@
-import { motion, type HTMLMotionProps } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { motion } from 'framer-motion'
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { useMemo } from 'react'
 import { cn } from '../../lib/cn'
 
-interface GlassCardProps extends HTMLMotionProps<'div'> {
+interface GlassCardOwnProps<T extends ElementType> {
+  as?: T
   children?: ReactNode
   interactive?: boolean
+  className?: string
 }
 
-export function GlassCard({
+type GlassCardProps<T extends ElementType> = GlassCardOwnProps<T> &
+  Omit<ComponentPropsWithoutRef<T>, keyof GlassCardOwnProps<T>>
+
+export function GlassCard<T extends ElementType = 'div'>({
+  as,
   className,
   children,
   interactive = false,
   ...rest
-}: GlassCardProps) {
+}: GlassCardProps<T>) {
+  const MotionComponent = useMemo(() => motion.create(as ?? 'div'), [as])
+
   return (
-    <motion.div
+    <MotionComponent
       className={cn(
         'glass-surface rounded-3xl p-6 shadow-2xl',
         interactive && 'cursor-pointer transition-shadow hover:shadow-black/40',
@@ -26,6 +35,6 @@ export function GlassCard({
       {...rest}
     >
       {children}
-    </motion.div>
+    </MotionComponent>
   )
 }
