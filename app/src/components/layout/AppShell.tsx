@@ -2,9 +2,15 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 import { ArtistProfilePage } from '../../pages/ArtistProfilePage'
+import { CartPage } from '../../pages/CartPage'
+import { CheckoutPage } from '../../pages/CheckoutPage'
 import { CreatePortfolioPage } from '../../pages/CreatePortfolioPage'
+import { FavoritesPage } from '../../pages/FavoritesPage'
 import { HomePage } from '../../pages/HomePage'
 import { NotFoundPage } from '../../pages/NotFoundPage'
+import { ProductDetailPage } from '../../pages/ProductDetailPage'
+import { ShopPage } from '../../pages/ShopPage'
+import { SupportPage } from '../../pages/SupportPage'
 import { Footer } from './Footer'
 import { Header } from './Header'
 
@@ -31,6 +37,12 @@ export function AppShell() {
               element={<ArtistProfilePage />}
             />
             <Route path="/create" element={<CreatePortfolioPage />} />
+            <Route path="/tienda" element={<ShopPage />} />
+            <Route path="/tienda/:productId" element={<ProductDetailPage />} />
+            <Route path="/carrito" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/favoritos" element={<FavoritesPage />} />
+            <Route path="/apoyar" element={<SupportPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </motion.main>
