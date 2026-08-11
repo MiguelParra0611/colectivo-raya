@@ -1,12 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { BubbleBurst } from '../components/shop/BubbleBurst'
 import {
   CheckoutStepper,
   type CheckoutStep,
 } from '../components/shop/CheckoutStepper'
 import { GlassButton } from '../components/ui/GlassButton'
 import { GlassPanel } from '../components/ui/GlassPanel'
+import { formatCardExpiry, formatCardNumber } from '../lib/cardFormatting'
 import { generateFakeOrderId } from '../lib/fakeOrderId'
 import { formatPrice } from '../lib/formatPrice'
 import { useShop } from '../state/useShop'
@@ -20,6 +22,7 @@ export function CheckoutPage() {
   const [step, setStep] = useState<CheckoutStep>('contact')
   const [orderId, setOrderId] = useState<string | null>(null)
   const [contact, setContact] = useState({ name: '', email: '' })
+  const [card, setCard] = useState({ number: '', expiry: '', cvc: '' })
 
   if (cartProducts.length === 0 && step !== 'confirmation') {
     return (
@@ -39,6 +42,7 @@ export function CheckoutPage() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
+      <BubbleBurst play={step === 'confirmation'} />
       <h1 className="text-center font-display text-4xl font-semibold text-ink">
         Pago
       </h1>
@@ -141,6 +145,14 @@ export function CheckoutPage() {
                   id="checkout-card"
                   required
                   inputMode="numeric"
+                  autoComplete="off"
+                  value={card.number}
+                  onChange={(event) =>
+                    setCard((c) => ({
+                      ...c,
+                      number: formatCardNumber(event.target.value),
+                    }))
+                  }
                   maxLength={19}
                   className={inputClassName}
                   placeholder="0000 0000 0000 0000"
@@ -157,6 +169,16 @@ export function CheckoutPage() {
                   <input
                     id="checkout-expiry"
                     required
+                    inputMode="numeric"
+                    autoComplete="off"
+                    value={card.expiry}
+                    onChange={(event) =>
+                      setCard((c) => ({
+                        ...c,
+                        expiry: formatCardExpiry(event.target.value),
+                      }))
+                    }
+                    maxLength={5}
                     className={inputClassName}
                     placeholder="MM/AA"
                   />
@@ -172,6 +194,14 @@ export function CheckoutPage() {
                     id="checkout-cvc"
                     required
                     inputMode="numeric"
+                    autoComplete="off"
+                    value={card.cvc}
+                    onChange={(event) =>
+                      setCard((c) => ({
+                        ...c,
+                        cvc: event.target.value.replace(/\D/g, '').slice(0, 4),
+                      }))
+                    }
                     maxLength={4}
                     className={inputClassName}
                     placeholder="123"

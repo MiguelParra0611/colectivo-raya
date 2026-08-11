@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { FramePicker } from '../components/frames/FramePicker'
 import { LivePreviewCard } from '../components/create-portfolio/LivePreviewCard'
 import { ProjectDraftEditor } from '../components/create-portfolio/ProjectDraftEditor'
@@ -6,6 +6,7 @@ import {
   createInitialDraft,
   portfolioDraftReducer,
 } from '../components/create-portfolio/portfolioDraftReducer'
+import { SubmitPortfolioModal } from '../components/create-portfolio/SubmitPortfolioModal'
 import { GlassButton } from '../components/ui/GlassButton'
 
 export function CreatePortfolioPage() {
@@ -14,6 +15,24 @@ export function CreatePortfolioPage() {
     undefined,
     createInitialDraft,
   )
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [validationError, setValidationError] = useState<string | null>(null)
+
+  const hasDescription = draft.portfolioDescription.trim().length > 0
+  const hasAtLeastOneImage = draft.projects.some((p) => p.previewUrl)
+
+  const handleSubmitClick = () => {
+    if (!hasDescription || !hasAtLeastOneImage) {
+      setValidationError(
+        !hasDescription
+          ? 'Escribe una descripción de tu portafolio antes de enviarlo.'
+          : 'Sube al menos una imagen de proyecto antes de enviarlo.',
+      )
+      return
+    }
+    setValidationError(null)
+    setIsModalOpen(true)
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -103,12 +122,31 @@ export function CreatePortfolioPage() {
           >
             + Añadir proyecto
           </GlassButton>
+
+          <div className="glass-surface flex flex-col items-start gap-3 rounded-3xl p-5">
+            <p className="text-sm text-ink-muted">
+              ¿Listo? Envía tu portafolio para que Colectivo Raya lo revise.
+            </p>
+            {validationError && (
+              <p role="alert" className="text-sm text-accent-ink">
+                {validationError}
+              </p>
+            )}
+            <GlassButton variant="primary" onClick={handleSubmitClick}>
+              Crear portafolio
+            </GlassButton>
+          </div>
         </div>
 
         <div className="lg:sticky lg:top-24 lg:self-start">
           <LivePreviewCard draft={draft} />
         </div>
       </div>
+
+      <SubmitPortfolioModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
+import { BubbleBurst } from '../components/shop/BubbleBurst'
 import { GlassButton } from '../components/ui/GlassButton'
 import { GlassPanel } from '../components/ui/GlassPanel'
 import { artists } from '../data/artists'
@@ -17,12 +18,13 @@ export function SupportPage() {
   const effectiveAmount = customAmount ? Number(customAmount) : amount
 
   const recipients = [
-    { id: 'colectivo', label: 'Colectivo Raya (ambos artistas)' },
+    { id: 'colectivo', label: 'Todos los artistas' },
     ...artists.map((artist) => ({ id: artist.slug, label: artist.name })),
   ]
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6">
+      <BubbleBurst play={submitted} />
       <p className="text-center text-sm uppercase tracking-[0.2em] text-accent-ink">
         Apoyar
       </p>
