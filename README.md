@@ -106,9 +106,8 @@ trazabilidad rápida de qué se pidió y cómo quedó.
       "Crear portafolio" (con validación) que abre un disclaimer de
       revisión, simula el proceso, y termina con una respuesta de
       aceptación de Colectivo Raya.
-
-### Pendiente / por confirmar
-
-- [ ] Publicar el repositorio en GitHub como público — pendiente de
-      confirmación del usuario (incluye decidir qué hacer con el correo
-      real en el historial de commits).
+- [x] Repositorio publicado en GitHub como público:
+      [github.com/MiguelParra0611/colectivo-raya](https://github.com/MiguelParra0611/colectivo-raya).
+      Los commits desde este punto usan el correo privado de GitHub
+      (`@users.noreply.github.com`); los commits anteriores a esta fecha
+      conservan el correo real en el historial (no se reescribió).
