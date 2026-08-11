@@ -52,6 +52,23 @@ npm run dev
 node scripts/optimize-images.mjs
 ```
 
+## Desplegar en Vercel
+
+El proyecto es 100% estático (sin backend), así que Vercel lo despliega
+sin configuración especial:
+
+1. En [vercel.com](https://vercel.com), inicia sesión con la cuenta de
+   GitHub que tiene este repo.
+2. "Add New" → "Project" → selecciona `colectivo-raya`.
+3. **Importante**: en "Root Directory" pon `app` — la app de Vite vive en
+   esa subcarpeta, no en la raíz del repo (Vercel detecta Vite
+   automáticamente una vez apunta ahí; no hace falta tocar el build
+   command ni el output directory).
+4. "Deploy". Cada push a `master` vuelve a desplegar solo.
+
+La URL que da Vercel (tipo `colectivo-raya.vercel.app`) ya es pública —
+se puede compartir con cualquiera sin que necesite cuenta ni login.
+
 ## Correcciones y roadmap
 
 Registro de las correcciones y peticiones pedidas sobre la marcha —
