@@ -27,7 +27,7 @@ export function CheckoutStepper({ currentStep }: CheckoutStepperProps) {
                 aria-current={isCurrent ? 'step' : undefined}
                 className={cn(
                   'flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold',
-                  isDone && 'bg-accent-2 text-white',
+                  isDone && 'bg-accent-2 text-ink',
                   isCurrent && 'bg-accent text-ink',
                   !isDone && !isCurrent && 'bg-ink/10 text-ink-muted',
                 )}

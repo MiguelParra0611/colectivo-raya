@@ -45,7 +45,7 @@ export function SupportPage() {
               transition={{ duration: 0.3 }}
               className="flex flex-col items-center gap-3 py-4 text-center"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-2 text-2xl text-white">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-accent-2 text-2xl text-ink">
                 ✓
               </div>
               <h2 className="font-display text-2xl font-semibold text-ink">
