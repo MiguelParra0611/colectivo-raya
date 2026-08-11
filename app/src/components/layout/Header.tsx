@@ -32,11 +32,16 @@ function IconLink({ to, label, count, icon }: IconLinkProps) {
     <NavLink
       to={to}
       aria-label={`${label}${count > 0 ? ` (${count})` : ''}`}
-      className="shine relative flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
+      className="relative flex h-9 w-9 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink"
     >
-      {icon}
+      {/* El efecto shine necesita overflow:hidden, así que vive en un
+          wrapper aparte — si estuviera en el mismo elemento que el
+          badge, se lo recortaría. */}
+      <span className="shine flex h-9 w-9 items-center justify-center rounded-full text-ink-muted transition-colors hover:text-ink">
+        {icon}
+      </span>
       {count > 0 && (
-        <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-semibold text-ink">
+        <span className="pointer-events-none absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-semibold text-ink">
           {count}
         </span>
       )}

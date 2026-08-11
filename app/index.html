@@ -2,7 +2,20 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
+    <!--
+      Favicon negro por defecto (funciona en cualquier navegador). Los
+      navegadores que soportan `media` en <link rel="icon"> (Chrome/Edge)
+      además usan la versión naranja cuando el sistema está en modo
+      oscuro. Firefox/Safari ignoran el `media` y se quedan con este
+      primer <link>, es decir, siempre ven el negro.
+    -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon-dark.svg"
+      media="(prefers-color-scheme: dark)"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"

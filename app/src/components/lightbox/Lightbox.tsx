@@ -153,7 +153,7 @@ export function Lightbox({
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: 'spring', stiffness: 260, damping: 26 }}
           >
-            <div className="glass-surface flex items-center justify-between gap-3 px-5 py-3">
+            <div className="flex items-center justify-between gap-3 bg-white px-5 py-3">
               <div className="min-w-0">
                 <h2 className="truncate font-display text-lg font-semibold text-ink">
                   {project.title}
@@ -215,12 +215,14 @@ export function Lightbox({
                   key={project.id}
                   src={project.image.fullSrc}
                   alt={project.image.alt}
+                  draggable={false}
+                  onDragStart={(event) => event.preventDefault()}
                   onDoubleClick={toggleZoom}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
                   onPointerCancel={handlePointerUp}
-                  className="max-h-full max-w-full touch-none select-none object-contain"
+                  className="max-h-full max-w-full touch-none select-none object-contain [-webkit-user-drag:none]"
                   style={{ cursor: isZoomed ? 'grab' : 'zoom-in' }}
                   animate={{ scale, x, y }}
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
@@ -231,7 +233,7 @@ export function Lightbox({
               </div>
             </div>
 
-            <div className="glass-surface px-5 py-4">
+            <div className="bg-white px-5 py-4">
               <p className="text-sm text-ink-muted">{project.description}</p>
             </div>
           </motion.div>
