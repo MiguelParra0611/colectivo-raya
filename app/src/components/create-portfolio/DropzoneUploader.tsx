@@ -61,8 +61,8 @@ export function DropzoneUploader({
         onDragLeave={() => setDraggingOver(false)}
         onDrop={handleDrop}
         className={cn(
-          'glass-surface relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-white/20 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
-          isDraggingOver && 'border-accent bg-white/[0.12]',
+          'glass-surface relative flex aspect-square w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-2xl border-2 border-dashed border-ink/20 text-center transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-ink',
+          isDraggingOver && 'border-accent-ink bg-accent-soft/20',
         )}
       >
         {previewUrl ? (

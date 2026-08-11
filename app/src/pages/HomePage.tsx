@@ -11,7 +11,7 @@ export function HomePage() {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="max-w-2xl"
       >
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent-ink">
           Galería virtual
         </p>
         <h1 className="mt-3 font-display text-4xl font-semibold text-ink sm:text-5xl">

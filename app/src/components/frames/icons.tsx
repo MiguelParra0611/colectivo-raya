@@ -94,11 +94,11 @@ export function CatIcon({ className }: IconProps) {
         d="M18 54 C10 50 8 38 12 30 C8 26 8 16 14 12 C18 16 19 20 19 20 C24 17 30 17 32 17 C34 17 40 17 45 20 C45 20 46 16 50 12 C56 16 56 26 52 30 C56 38 54 50 46 54 C40 57 24 57 18 54 Z"
         fill="currentColor"
       />
-      <circle cx="26" cy="34" r="2.4" fill="var(--color-bg-start)" />
-      <circle cx="38" cy="34" r="2.4" fill="var(--color-bg-start)" />
+      <circle cx="26" cy="34" r="2.4" fill="var(--color-bg-base)" />
+      <circle cx="38" cy="34" r="2.4" fill="var(--color-bg-base)" />
       <path
         d="M30 40 C31 42 33 42 34 40"
-        stroke="var(--color-bg-start)"
+        stroke="var(--color-bg-base)"
         strokeWidth="1.6"
         strokeLinecap="round"
         fill="none"

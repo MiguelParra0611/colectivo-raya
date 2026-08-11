@@ -37,9 +37,9 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
             src={coverImage}
             alt=""
             aria-hidden="true"
-            className="h-[130%] w-full scale-110 object-cover opacity-40 blur-md"
+            className="h-[130%] w-full scale-110 object-cover opacity-60 blur-md"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-[var(--color-bg-start)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/30 to-[var(--color-bg-base)]" />
         </motion.div>
       )}
 
@@ -50,7 +50,7 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
         <div className="relative">
           <FrameRenderer frameStyle={selectedFrame} />
           <GlassPanel as="div" className="p-8 sm:p-10">
-            <p className="text-sm uppercase tracking-[0.2em] text-accent">
+            <p className="text-sm uppercase tracking-[0.2em] text-accent-ink">
               Portafolio
             </p>
             <h1 className="mt-3 font-display text-4xl font-semibold text-ink sm:text-5xl">
@@ -65,13 +65,13 @@ export function ArtistHero({ artist }: ArtistHeroProps) {
                 href={artist.instagramUrl}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="font-medium text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+                className="font-medium text-accent-ink underline decoration-accent-ink/40 underline-offset-4 hover:decoration-accent-ink"
               >
                 {artist.instagramHandle} en Instagram
               </a>
             </div>
 
-            <div className="mt-8 border-t border-white/10 pt-6">
+            <div className="mt-8 border-t border-ink/10 pt-6">
               <p className="text-sm text-ink-muted">
                 Probar un marco decorativo para este portafolio:
               </p>

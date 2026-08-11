@@ -15,7 +15,7 @@ export function LivePreviewCard({ draft }: LivePreviewCardProps) {
     <div className="relative">
       <FrameRenderer frameStyle={draft.frameStyle} />
       <GlassPanel className="p-6 sm:p-8">
-        <p className="text-sm uppercase tracking-[0.2em] text-accent">
+        <p className="text-sm uppercase tracking-[0.2em] text-accent-ink">
           Vista previa
         </p>
         <h3 className="mt-2 font-display text-2xl font-semibold text-ink">

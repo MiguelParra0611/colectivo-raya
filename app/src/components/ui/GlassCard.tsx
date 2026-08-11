@@ -26,7 +26,8 @@ export function GlassCard<T extends ElementType = 'div'>({
     <MotionComponent
       className={cn(
         'glass-surface rounded-3xl p-6 shadow-2xl',
-        interactive && 'cursor-pointer transition-shadow hover:shadow-black/40',
+        interactive &&
+          'shine cursor-pointer transition-shadow hover:shadow-black/20',
         className,
       )}
       whileHover={interactive ? { y: -6, scale: 1.015 } : undefined}

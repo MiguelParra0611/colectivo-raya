@@ -29,7 +29,7 @@ export function ArtistCard({ artist }: ArtistCardProps) {
     <Link
       to={`/artists/${artist.slug}`}
       aria-label={`Ver el portafolio de ${artist.name}`}
-      className="block rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+      className="block rounded-3xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-ink"
       onMouseEnter={prefersReducedMotion ? undefined : pause}
       onMouseLeave={prefersReducedMotion ? undefined : resume}
       onFocus={prefersReducedMotion ? undefined : pause}

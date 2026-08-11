@@ -47,7 +47,7 @@ export function CreatePortfolioPage() {
               }
               placeholder="Cuenta quién eres y qué tipo de trabajo compartes…"
               rows={3}
-              className="glass-surface mt-1 w-full resize-none rounded-xl px-3 py-2 text-ink placeholder:text-ink-muted/60 focus-visible:outline-2 focus-visible:outline-accent"
+              className="glass-surface mt-1 w-full resize-none rounded-xl px-3 py-2 text-ink placeholder:text-ink-muted/60 focus-visible:outline-2 focus-visible:outline-accent-ink"
             />
           </div>
 

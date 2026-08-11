@@ -39,7 +39,7 @@ export function FramePicker({ value, onChange }: FramePickerProps) {
             variant={isSelected ? 'primary' : 'secondary'}
             aria-pressed={isSelected}
             onClick={() => onChange(frameStyle)}
-            className={cn(isSelected && 'ring-2 ring-accent ring-offset-0')}
+            className={cn(isSelected && 'ring-2 ring-accent-ink ring-offset-0')}
           >
             {Icon && <Icon className="h-4 w-4" />}
             {FRAME_STYLE_LABELS[frameStyle]}

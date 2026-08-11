@@ -196,7 +196,7 @@ export function Lightbox({
                     type="button"
                     aria-label="Proyecto anterior"
                     onClick={goPrev}
-                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent-ink"
                   >
                     ‹
                   </button>
@@ -204,7 +204,7 @@ export function Lightbox({
                     type="button"
                     aria-label="Proyecto siguiente"
                     onClick={goNext}
-                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent"
+                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full p-2 text-white/80 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-2 focus-visible:outline-accent-ink"
                   >
                     ›
                   </button>
