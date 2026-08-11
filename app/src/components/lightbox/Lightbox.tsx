@@ -32,11 +32,26 @@ export function Lightbox({
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const lastFocusedRef = useRef<Element | null>(null)
   const dragState = useRef<{ x: number; y: number } | null>(null)
+  const wheelTargetRef = useRef<HTMLDivElement>(null)
 
   const { scale, x, y, isZoomed, zoomIn, zoomOut, toggleZoom, onWheel, pan } =
     useLightboxZoomPan(project?.id ?? null)
 
   const isOpen = project !== undefined
+
+  // React adjunta su listener de "wheel" a nivel de raíz como passive, así
+  // que un onWheel de React no puede bloquear el scroll de la página detrás
+  // del modal — hace falta un listener nativo con { passive: false }.
+  useEffect(() => {
+    const target = wheelTargetRef.current
+    if (!target || !isOpen) return
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault()
+      onWheel(event.deltaY)
+    }
+    target.addEventListener('wheel', handleWheel, { passive: false })
+    return () => target.removeEventListener('wheel', handleWheel)
+  }, [isOpen, onWheel])
 
   useEffect(() => {
     if (!isOpen) return
@@ -172,11 +187,8 @@ export function Lightbox({
             </div>
 
             <div
+              ref={wheelTargetRef}
               className="relative flex-1 overflow-hidden bg-black/40"
-              onWheel={(event) => {
-                event.preventDefault()
-                onWheel(event.deltaY)
-              }}
             >
               {projects.length > 1 && (
                 <>
